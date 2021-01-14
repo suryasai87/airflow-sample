@@ -67,7 +67,7 @@ for i,config in enumerate(config):
 
     #Create full path for the file
     hql_file_path = os.path.join(os.path.dirname(__file__), source['hql'])
-    print hql_file_path
+    print(hql_file_path)
     run_hive_query = HiveOperator(
         task_id='run_hive_query',
         dag = dag,
