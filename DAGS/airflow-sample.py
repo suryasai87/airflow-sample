@@ -11,7 +11,7 @@ from airflow.contrib.operators.qubole_operator import QuboleOperator
 # These args will get passed on to each operator
 # You can override them on a per-task basis during operator initialization
 default_args = {
-    'owner': 'turaga',
+    'owner': 'sturaga',
     'depends_on_past': False,
     'start_date': days_ago(2),
     'email': ['tsuryasai@gmail.com'],
@@ -48,7 +48,7 @@ t1 = BashOperator(
 )
 
 t2 = BashOperator(
-    task_id='print_date',
+    task_id='print_date2',
     bash_command='date',
     dag=dag,
 )
