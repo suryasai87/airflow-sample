@@ -53,4 +53,10 @@ t2 = BashOperator(
     dag=dag,
 )
 
-t2 >> t1
+t3 = BashOperator(
+    task_id='print_date3',
+    bash_command='date',
+    dag=dag,
+)
+
+t3 >> t2 >> t1
