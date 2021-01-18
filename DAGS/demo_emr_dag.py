@@ -1,7 +1,7 @@
 #define the DAG
 dag = airflow.DAG(
 'demo_emr_dag',
-schedule_interval='@once'
+schedule_interval='@once',
 default_args=args,
 max_active_runs=1)
 
