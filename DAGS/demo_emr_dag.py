@@ -102,8 +102,8 @@ def issue_step(name, args):
 def check_data_exists():
     logging.info('checking that data exists in s3')
     source_s3 = S3Hook(aws_conn_id='aws_default')
-    keys = source_s3.list_keys(bucket_name='deutsche-boerse-eurex-pds',
-                               prefix='2018-11-18/')
+    keys = source_s3.list_keys(bucket_name='synpuf',
+                               prefix='DE1_0_2008_Beneficiary_Summary_File_Sample_1/')
     logging.info('keys {}'.format(keys))
 
 
