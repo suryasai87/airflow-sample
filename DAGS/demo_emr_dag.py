@@ -49,12 +49,12 @@ default_emr_settings = {"Name": "finance_job_flow",
                                     "InstanceCount": 1
                                 }
                             ],
-                            "Ec2KeyName": "emma",
+                            "Ec2KeyName": "sturaga",
                             "KeepJobFlowAliveWhenNoSteps": True,
                             'EmrManagedMasterSecurityGroup': 'sg-0b705a418dec3329e',
                             'EmrManagedWorkerSecurityGroup': 'sg-0b705a418dec3329e',
                             'Placement': {
-                                'AvailabilityZone': 'us-east-1a',
+                                'AvailabilityZone': 'us-gov-east-1a',
                             },
 
                         },
