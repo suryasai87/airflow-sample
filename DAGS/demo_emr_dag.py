@@ -52,7 +52,7 @@ default_emr_settings = {"Name": "finance_job_flow",
                             "Ec2KeyName": "sturaga",
                             "KeepJobFlowAliveWhenNoSteps": True,
                             'EmrManagedMasterSecurityGroup': 'sg-0b705a418dec3329e',
-                            'EmrManagedWorkerSecurityGroup': 'sg-0b705a418dec3329e',
+                            'EmrManagedSlaveSecurityGroup': 'sg-0b705a418dec3329e',
                             'Placement': {
                                 'AvailabilityZone': 'us-gov-east-1a',
                             },
