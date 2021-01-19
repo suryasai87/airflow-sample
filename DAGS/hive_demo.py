@@ -6,7 +6,8 @@ are highly recommended.
 """
 from datetime import datetime, timedelta
 from airflow.models import DAG  # Import the DAG class
-from airflow.operators.sensors import NamedHivePartitionSensor
+#from airflow.operators.sensors import NamedHivePartitionSensor
+from airflow.providers.apache.hive.sensors.named_hive_partition import NamedHivePartitionSensor  # noqa
 from airflow.operators.hive_operator import HiveOperator
 
 ### You can import more operators as you see fit!
