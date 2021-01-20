@@ -5,7 +5,7 @@ from airflow.operators import HiveOperator
 from datetime import datetime, timedelta
 
 args = {
-    'owner': 'airflow',
+    'owner': 'sturaga',
     'depends_on_past': False,
     'start_date': datetime(2016, 3, 29),
 }
