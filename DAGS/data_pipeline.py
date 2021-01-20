@@ -19,7 +19,7 @@ default_args = {
     'start_date': datetime(2021, 1, 19),
     'depends_on_past': False,
     'retries': 1,
-    'provide_context': True
+    'provide_context': True,
     'retry_delay': timedelta(minutes=5)
 }
 
