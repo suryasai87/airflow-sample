@@ -4,7 +4,7 @@ from airflow.operators import BashOperator, HiveOperator
 from datetime import datetime, timedelta
 
 default_args = {
-    'owner': 'sturaga',
+    'owner': 'airflow',
     'start_date': datetime(2016, 1, 14),
     'retries': 1,
     'retry_delay': timedelta(minutes=5)
