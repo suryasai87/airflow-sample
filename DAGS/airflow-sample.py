@@ -11,7 +11,7 @@ from airflow.contrib.operators.qubole_operator import QuboleOperator
 # These args will get passed on to each operator
 # You can override them on a per-task basis during operator initialization
 default_args = {
-    'owner': 'sturaga',
+    'owner': 'airflow',
     'depends_on_past': False,
     'start_date': days_ago(2),
     'email': ['tsuryasai@gmail.com'],
@@ -34,7 +34,7 @@ default_args = {
     # 'trigger_rule': 'all_success'
 }
 dag = DAG(
-    'dag_example',
+    'airflow-sample',
     default_args=default_args,
     description='A tutorial DAG 500',
     schedule_interval=timedelta(days=1)
