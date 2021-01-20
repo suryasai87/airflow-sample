@@ -180,8 +180,11 @@ terminate_job_flow_task = EmrTerminateJobFlowOperator(
 # defining the job dependency
 task1 >> task2
 task2 >> check_data_exists_task
-check_data_exists_task >> hive_data_blending
-hive_data_blending >> create_job_flow_task
+#check_data_exists_task >> hive_data_blending
+#hive_data_blending >> create_job_flow_task
+
+check_data_exists_task >> create_job_flow_task
+
 create_job_flow_task >> add_step_task
 add_step_task >> watch_prev_step_task
 watch_prev_step_task >> terminate_job_flow_task
