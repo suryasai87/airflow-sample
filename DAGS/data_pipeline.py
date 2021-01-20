@@ -1,7 +1,7 @@
+from __future__ import absolute_import, unicode_literals, print_function
 import os
 import logging
 import airflow
-from __future__ import absolute_import, unicode_literals, print_function
 from airflow import DAG
 from airflow.operators import BashOperator, HiveOperator
 from datetime import datetime, timedelta
