@@ -10,7 +10,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
-dag = DAG('incremental_load', default_args=default_args)
+dag = DAG('ingestion_demo',default_args=default_args)
 
 sqoop_job = """
  exec ./scripts/sqoop_incremental.sh
