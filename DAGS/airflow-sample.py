@@ -14,7 +14,7 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': days_ago(2),
-    'email': ['tsuryasai@gmail.com'],
+    'email': ['sampleemail@somedomain.com'],
     'email_on_failure': True,
     'email_on_retry': False,
     'retries': 1,
