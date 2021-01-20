@@ -20,7 +20,7 @@ dag = DAG(
 for sqlcmd in commands:
 
         ret = HiveOperator(
-            task_id='id_taskX',
+            task_id='hive_demo',
             hiveconf_jinja_translate=True,
             hql=sqlcmd,
             trigger_rule='all_done',
