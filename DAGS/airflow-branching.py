@@ -1,3 +1,4 @@
+'''
 """
 Airflow Demo leveraging QuboleOperator
 """
@@ -211,3 +212,4 @@ alert = EmailOperator(
 )
 join.set_downstream(t12)
 t12.set_downstream(alert)
+'''
