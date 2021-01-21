@@ -50,7 +50,6 @@ task2 = HiveOperator(
 commands = ['cmd1','cmd2','...']
 
 for sqlcmd in commands:
-
         ret = HiveOperator(
             task_id='hive_data_blending',
             hiveconf_jinja_translate=True,
