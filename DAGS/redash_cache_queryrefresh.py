@@ -1,3 +1,4 @@
+'''
 from __future__ import absolute_import, unicode_literals, print_function
 import os
 import logging
@@ -37,3 +38,4 @@ else:
     raise Exception('Query execution failed.')
 
 return response.json()['query_result']['data']['rows']
+'''
