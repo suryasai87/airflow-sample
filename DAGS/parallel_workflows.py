@@ -232,7 +232,7 @@ sqoop_import_task >> hive_create_ddl_task
 hive_create_ddl_task >> check_data_exists_task
 #check_data_exists_task >> hive_data_blending
 #hive_data_blending >> create_job_flow_task
-check_data_exists_task.set_upsream(branching)
+check_data_exists_task.set_upstream(branching)
 terminate_job_flow_task.set_downstream(join)
 check_data_exists_task >> create_job_flow_task
 
