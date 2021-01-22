@@ -137,8 +137,10 @@ t10 = HiveOperator(
     db_parallelism=2,
     dbtap_id=2064,
     dag=dag)
-
+''''''
 prog = '''
+'''
+
 import scala.math.random
 
 import org.apache.spark._
@@ -160,7 +162,7 @@ object SparkPi {
   }
 }
 '''
-
+'''
 t11 = BashOperator(
     task_id='spark_cmd',
     command_type="sparkcmd",
