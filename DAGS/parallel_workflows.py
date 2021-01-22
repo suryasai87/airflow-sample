@@ -239,7 +239,7 @@ branching.set_downstream(join)
 
 join >> check_data_exists_task
 
-terminate_job_flow_task.set_downstream(join)
+#terminate_job_flow_task.set_downstream(join)
 check_data_exists_task >> create_job_flow_task
 
 create_job_flow_task >> add_step_task
