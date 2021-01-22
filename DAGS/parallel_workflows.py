@@ -229,10 +229,10 @@ join = DummyOperator(
 
 # defining the job dependency
 sqoop_import_task >> hive_create_ddl_task
-hive_create_ddl_task >> check_data_exists_task
+#hive_create_ddl_task >> check_data_exists_task
 #check_data_exists_task >> hive_data_blending
 #hive_data_blending >> create_job_flow_task
-check_data_exists_task.set_upstream(branching)
+hive_data_blending.set_upstream(branching)
 
 hive_create_ddl_task.set_downstream(join)
 branching.set_downstream(join)
