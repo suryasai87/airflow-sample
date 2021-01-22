@@ -14,7 +14,6 @@ from airflow.contrib.sensors.emr_step_sensor import EmrStepSensor
 from airflow.hooks.S3_hook import S3Hook
 from airflow.operators.python_operator import PythonOperator, BranchPythonOperator
 from airflow.operators.email_operator import EmailOperator
-#from airflow.contrib.operators.qubole_sensors import QuboleFileSensor, QubolePartitionSensor
 import filecmp
 
 default_args = {
@@ -227,6 +226,14 @@ join = DummyOperator(
     dag=dag
 )
 
+alert_completion = EmailOperator(
+    task_id='CompletionEmail',
+    to='test@domain.com',
+    subject='Airflow processing report',
+    html_content='raw content #2',
+    dag=dag
+)
+
 # defining the job dependency
 sqoop_import_task >> hive_create_ddl_task
 #hive_create_ddl_task >> check_data_exists_task
@@ -245,3 +252,5 @@ check_data_exists_task >> create_job_flow_task
 create_job_flow_task >> add_step_task
 add_step_task >> watch_prev_step_task
 watch_prev_step_task >> terminate_job_flow_task
+
+terminate_job_flow_task.set_downstream(alert_completion)
