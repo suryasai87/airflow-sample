@@ -75,7 +75,7 @@ commands = ['INSERT INTO TABLE orders_trans SELECT order_id, first_name,last_nam
            ]
 
 for sqlcmd in commands:
-        ret = HiveOperator(
+        hive_data_blending_task = HiveOperator(
             task_id='hive_data_blending',
             hiveconf_jinja_translate=True,
             hql=sqlcmd,
@@ -231,8 +231,8 @@ join = DummyOperator(
 sqoop_import_task >> hive_create_ddl_task
 #hive_create_ddl_task >> check_data_exists_task
 #check_data_exists_task >> hive_data_blending
-#hive_data_blending >> create_job_flow_task
-hive_data_blending.set_upstream(branching)
+#hive_data_blending_task >> create_job_flow_task
+hive_data_blending_task.set_upstream(branching)
 
 hive_create_ddl_task.set_downstream(join)
 branching.set_downstream(join)
