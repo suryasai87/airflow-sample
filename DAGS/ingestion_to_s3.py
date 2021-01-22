@@ -40,5 +40,5 @@ upload_to_S3_task = PythonOperator(
     dag=my_dag)
     
     
-    # Use arrows to set dependencies between tasks
-    start_task >> upload_to_S3_task
+# Use arrows to set dependencies between tasks
+start_task >> upload_to_S3_task
