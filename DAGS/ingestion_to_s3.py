@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators import DummyOperator, PythonOperator
 import airflow.hooks.S3_hook
 import boto3
+import requests
 
 default_args = {
     'owner': 'airflow',
@@ -33,7 +34,7 @@ upload_to_S3_task = PythonOperator(
     task_id='upload_to_S3',
     python_callable=upload_file_to_S3_with_hook,
     op_kwargs={
-        'filename': 'C:\Users\sturaga\Documents\TXT-files\state_codes.csv',
+        'filename': 'C:\\Users\\sturaga\\Documents\\TXT-files\\state_codes.csv',
         'key': 'state_codes.csv',
         'bucket_name': 'sturaga-defloc',
     },
