@@ -14,7 +14,7 @@ from airflow.contrib.sensors.emr_step_sensor import EmrStepSensor
 from airflow.hooks.S3_hook import S3Hook
 from airflow.operators.python_operator import PythonOperator, BranchPythonOperator
 from airflow.operators.email_operator import EmailOperator
-from airflow.contrib.operators.qubole_sensors import QuboleFileSensor, QubolePartitionSensor
+#from airflow.contrib.operators.qubole_sensors import QuboleFileSensor, QubolePartitionSensor
 import filecmp
 
 default_args = {
