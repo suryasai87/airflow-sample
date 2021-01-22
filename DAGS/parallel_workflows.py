@@ -30,7 +30,7 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id='data_pipeline',
+    dag_id='parallel_workflows',
     default_args=default_args,
     schedule_interval="15 08 * * *",
     dagrun_timeout=timedelta(minutes=1),
