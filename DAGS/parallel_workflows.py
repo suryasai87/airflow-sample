@@ -49,7 +49,7 @@ sqoop_import_task = BashOperator(
 # Inserting the data from Hive external table to the target table
 hive_create_ddl_task = HiveOperator(
         task_id= 'hive_create_ddl',
-        hql='drop table if exists `default.prescription_drug_events_2008_2010`;
+        hql='''drop table if exists `default.prescription_drug_events_2008_2010`;
 create external table if not exists `default.prescription_drug_events_2008_2010`(
 DESYNPUF_ID STRING
 ,PDE_ID STRING
@@ -65,7 +65,7 @@ ROW FORMAT DELIMITED
 STORED AS TEXTFILE
 LOCATION
   's3a://synpuf/DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1'
-TBLPROPERTIES ('skip.header.line.count'='1'); ',
+TBLPROPERTIES ('skip.header.line.count'='1'); ''',
         depends_on_past=True,
         dag=dag
 )
