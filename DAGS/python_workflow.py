@@ -1,6 +1,6 @@
-pip install requests
-pip install s3fs
-pip install pandas
+!pip install requests
+!pip install s3fs
+!pip install pandas
 
 from __future__ import absolute_import, unicode_literals, print_function
 
@@ -16,6 +16,7 @@ from airflow.contrib.sensors.emr_step_sensor import EmrStepSensor
 from airflow.hooks.S3_hook import S3Hook
 from airflow.operators.python_operator import PythonOperator, BranchPythonOperator
 from airflow.operators.email_operator import EmailOperator
+from airflow.models.connection import Connection
 
 import os
 import logging
@@ -23,6 +24,13 @@ import airflow
 import filecmp
 import requests
 import pandas as pd
+
+os.environ["AWS_ACCESS_KEY_ID"] = blaine_aws_conn.AWS_ACCESS_KEY_ID
+os.environ["AWS_SECRET_ACCESS_KEY"] = blaine_aws_conn.AWS_SECRET_ACCESS_KEY
+os.environ["AWS_DEFAULT_REGION"] = blaine_aws_conn.AWS_DEFAULT_REGION
+
+_keys={AWS_ACCESS_KEY_ID: ""
+      }  
 
 default_args = {
     'owner': 'airflow',
@@ -42,6 +50,8 @@ dag = DAG(
     schedule_interval="15 08 * * *",
     dagrun_timeout=timedelta(minutes=1),
     max_active_runs=1)
+    
+  
     
 os.environ["AWS_ACCESS_KEY_ID"] = blaine_aws_conn.AWS_ACCESS_KEY_ID
 os.environ["AWS_SECRET_ACCESS_KEY"] = blaine_aws_conn.AWS_SECRET_ACCESS_KEY
