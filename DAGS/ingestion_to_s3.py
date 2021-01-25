@@ -11,6 +11,13 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
+dag = DAG(
+    dag_id='ingestion_to_s3',
+    default_args=default_args,
+    schedule_interval="15 08 * * *",
+    dagrun_timeout=timedelta(minutes=1),
+    max_active_runs=1)
+
 s3 = boto3.resource('s3')
 '''
 def upload_file_to_S3(filename, key, bucket_name):
@@ -39,7 +46,7 @@ upload_to_S3_task = PythonOperator(
         'key': 'state_codes.csv',
         'bucket_name': 'sturaga-defloc',
     },
-    dag=my_dag)
+    dag=dag)
     
     
 # Use arrows to set dependencies between tasks
