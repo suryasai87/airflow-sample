@@ -251,6 +251,13 @@ alert_data_pipeline_completion = EmailOperator(
     html_content='raw content #2',
     dag=dag
 )
+
+join_tail = DummyOperator(
+    task_id='join_tail',
+    trigger_rule="all_done",
+    dag=dag
+)
+
 # defining the job dependency
 
 sqoop_import_task >> hive_create_ddl_task
@@ -264,5 +271,7 @@ add_step_task >> watch_prev_step_task
 watch_prev_step_task >> terminate_job_flow_task
 terminate_job_flow_task >> branching
 branching >> hive_data_blending_task
-hive_data_blending_task.set_downstream(alert_refresh_dashboard)
-branching.set_downstream(alert_data_pipeline_completion)
+hive_data_blending_task >> join_tail
+branching >> alert_data_pipeline_completion
+alert_data_pipeline_completion >> join_tail
+join_tail >> alert_refresh_dashboard
