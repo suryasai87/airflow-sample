@@ -57,7 +57,7 @@ t3 = PythonOperator(
 t3.set_upstream(t1)
 t3.set_upstream(t2)
 
-options = ['shell_cmd', 'presto_cmd', 'db_query', 'spark_cmd']
+options = ['shell_cmd', 'hive_cmd', 'db_query', 'spark_cmd']
 
 branching = BranchPythonOperator(
     task_id='branching',
@@ -91,7 +91,7 @@ t5.set_upstream(t4)
 t5.set_downstream(join)
 
 t6 = QuboleOperator(
-    task_id='presto_cmd',
+    task_id='hive_cmd',
     command_type='prestocmd',
     query='show tables',
     dag=dag)
