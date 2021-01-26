@@ -273,5 +273,5 @@ terminate_job_flow_task >> branching
 branching >> hive_data_blending_task
 branching >> alert_data_pipeline_completion
 alert_data_pipeline_completion >> join_tail
-join_tail.set_upsteam(hive_data_blending_task)
+join_tail.set_upstream(hive_data_blending_task)
 join_tail >> alert_refresh_dashboard
