@@ -6,7 +6,7 @@ from airflow import DAG
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator, BranchPythonOperator
 from airflow.contrib.operators.qubole_operator import QuboleOperator
-from airflow.contrib.operators.qubole_sensors import QuboleFileSensor, QubolePartitionSensor
+#from airflow.contrib.operators.qubole_sensors import QuboleFileSensor, QubolePartitionSensor
 from datetime import datetime, timedelta
 from airflow.operators.email_operator import EmailOperator
 import filecmp
