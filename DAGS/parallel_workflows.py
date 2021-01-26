@@ -218,7 +218,7 @@ branching = BranchPythonOperator(
     python_callable=lambda: options[0],
     trigger_rule="one_success",
     dag=dag)
-branching.set_upstream(source_schema_changes_task)
+
 
 join = DummyOperator(
     task_id='join',
@@ -234,23 +234,31 @@ alert_completion = EmailOperator(
     dag=dag
 )
 
+alert_schema_change = EmailOperator(
+    task_id='Schema_Change_Alert_Email',
+    to='test@domain.com',
+    subject='Airflow schema change report',
+    html_content='raw content #2',
+    dag=dag
+)
+
 # defining the job dependency
+
 sqoop_import_task >> hive_create_ddl_task
+hive_create_ddl_task >> join
+source_schema_changes_task >> join
+join >> alert_schema_change
+alert_schema_change >> check_data_exists_task
+check_data_exists_task >> create_job_flow_task
+create_job_flow_task >> add_step_task
+add_step_task >> watch_prev_step_task
+watch_prev_step_task >> join
+hive_data_blending_task >> join
+join >> terminate_job_flow_task
+terminate_job_flow_task.set_downstream(alert_completion)
+
 #hive_create_ddl_task >> check_data_exists_task
 #check_data_exists_task >> hive_data_blending
 #hive_data_blending_task >> create_job_flow_task
-hive_data_blending_task.set_upstream(branching)
-
-hive_create_ddl_task.set_downstream(join)
-branching.set_downstream(join)
-
-join >> check_data_exists_task
-
 #terminate_job_flow_task.set_downstream(join)
-check_data_exists_task >> create_job_flow_task
-
-create_job_flow_task >> add_step_task
-add_step_task >> watch_prev_step_task
-watch_prev_step_task >> terminate_job_flow_task
-
-terminate_job_flow_task.set_downstream(alert_completion)
+#create_job_flow_task >> add_step_task
