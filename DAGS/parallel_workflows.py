@@ -254,7 +254,7 @@ alert_data_pipeline_completion = EmailOperator(
 
 join_tail = DummyOperator(
     task_id='join_tail',
-    trigger_rule="all_done",
+    trigger_rule="one_success",
     dag=dag
 )
 
