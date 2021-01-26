@@ -264,8 +264,8 @@ add_step_task >> watch_prev_step_task
 watch_prev_step_task >> terminate_job_flow_task
 terminate_job_flow_task >> branching
 branching >> hive_data_blending_task
-branching.set_downstream(alert_data_pipeline_completion)
 hive_data_blending_task >> alert_refresh_dashboard
+branching.set_downstream(alert_data_pipeline_completion)
 
 #hive_create_ddl_task >> check_data_exists_task
 #check_data_exists_task >> hive_data_blending
