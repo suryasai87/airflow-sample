@@ -179,14 +179,14 @@ t11.set_upstream(branching)
 t11.set_downstream(t10)
 t10.set_downstream(join)
 
-
+'''
 t12 = QuboleFileSensor(
     task_id='check_s3_file',
     qubole_conn_id='qubole_default',
     poke_interval=10,
     timeout=60,
     data={"files":
-              ["s3://scripts_bucketss/jars/hadoop-0.20.1-dev-streaming.jar",
+              ["s3://scripts_buckets/jars/hadoop-0.20.1-dev-streaming.jar",
               "s3://data_buckets/3.tsv"
 
                ] # will check for availability of all the files in array
@@ -207,6 +207,22 @@ t13 = QubolePartitionSensor(
           },
     dag=dag
     )
+'''
+def check_data_exists():
+    logging.info('checking that data exists in s3')
+    source_s3 = S3Hook(aws_conn_id='aws_default')
+    keys = source_s3.list_keys(bucket_name='synpuf',
+                               prefix='DE1_0_2008_Beneficiary_Summary_File_Sample_1/')
+    logging.info('keys {}'.format(keys))
+
+t12 = PythonOperator(task_id='check_s3_file',
+                                        python_callable=check_data_exists,
+                                        provide_context=False,
+                                        dag=dag)
+t13 = PythonOperator(task_id='check_hive_partition',
+                                        python_callable=check_data_exists,
+                                        provide_context=False,
+                                        dag=dag)
 
 alert = EmailOperator(
     task_id='CompletionEmail',
