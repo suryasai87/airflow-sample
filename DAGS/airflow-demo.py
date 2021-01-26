@@ -232,4 +232,4 @@ alert = EmailOperator(
     dag=dag
 )
 join.set_downstream(t12)
-t12.set_downstream(alert)
+t13.set_downstream(alert)
