@@ -226,14 +226,6 @@ join = DummyOperator(
     dag=dag
 )
 
-alert_completion = EmailOperator(
-    task_id='CompletionEmail',
-    to='test@domain.com',
-    subject='Airflow processing report',
-    html_content='raw content #2',
-    dag=dag
-)
-
 alert_schema_change = EmailOperator(
     task_id='Schema_Change_Alert_Email',
     to='test@domain.com',
@@ -242,6 +234,23 @@ alert_schema_change = EmailOperator(
     dag=dag
 )
 
+
+alert_refresh_dashboard = EmailOperator(
+    task_id='Dashboard_Refresh_Email',
+    to='test@domain.com',
+    subject='Airflow Refresh report',
+    html_content='raw content #2',
+    dag=dag
+)
+
+
+alert_data_pipeline_completion = EmailOperator(
+    task_id='Data_Pipeline_Completion_Email',
+    to='test@domain.com',
+    subject='Airflow Data Pipeline Completion Email report',
+    html_content='raw content #2',
+    dag=dag
+)
 # defining the job dependency
 
 sqoop_import_task >> hive_create_ddl_task
@@ -252,9 +261,11 @@ alert_schema_change >> check_data_exists_task
 check_data_exists_task >> create_job_flow_task
 create_job_flow_task >> add_step_task
 add_step_task >> watch_prev_step_task
-watch_prev_step_task >> hive_data_blending_task
-hive_data_blending_task  >> terminate_job_flow_task
-terminate_job_flow_task.set_downstream(alert_completion)
+watch_prev_step_task >> terminate_job_flow_task
+terminate_job_flow_task >> branching
+branching >> hive_data_blending_task
+branching.set_downstream(alert_data_pipeline_completion)
+hive_data_blending_task.set_downstream(alert_refresh_dashboard)
 
 #hive_create_ddl_task >> check_data_exists_task
 #check_data_exists_task >> hive_data_blending
