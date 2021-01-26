@@ -252,9 +252,8 @@ alert_schema_change >> check_data_exists_task
 check_data_exists_task >> create_job_flow_task
 create_job_flow_task >> add_step_task
 add_step_task >> watch_prev_step_task
-watch_prev_step_task >> join
-hive_data_blending_task >> join
-join >> terminate_job_flow_task
+watch_prev_step_task >> hive_data_blending_task
+hive_data_blending_task  >> terminate_job_flow_task
 terminate_job_flow_task.set_downstream(alert_completion)
 
 #hive_create_ddl_task >> check_data_exists_task
