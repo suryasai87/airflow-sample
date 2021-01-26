@@ -4,7 +4,7 @@
 #!pip install pandas
 
 
-''''
+'''
 from __future__ import absolute_import, unicode_literals, print_function
 
 from airflow import DAG
@@ -88,5 +88,4 @@ FIPS_states_query = requests.get(url + '?get=NAME&for=state:*' + '&key=' + key)
 FIPS_states_table = parse_query(FIPS_states_query.text)
 #
 FIPS_states_table.to_csv('s3://synpuf/state_codes/FIPS_states_table.csv')
-''''
-
+'''
