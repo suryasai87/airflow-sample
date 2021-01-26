@@ -1,8 +1,8 @@
-''''
-!pip install requests
-!pip install s3fs
-!pip install pandas
-''''
+
+#!pip install requests
+#!pip install s3fs
+#!pip install pandas
+
 
 ''''
 from __future__ import absolute_import, unicode_literals, print_function
